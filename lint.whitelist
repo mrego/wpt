@@ -49,24 +49,30 @@ TRAILING WHITESPACE: encoding/legacy*/*
 
 ## File types that should never be checked ##
 
-*:*.pdf
-*:*.jpg
-*:*.png
-*:*.gif
-*:*.pdf
-*:*.wav
-*:*.mp3
-*:*.m4a
-*:*.oga
-*:*.ogv
-*:*.webm
-*:*.mp4
-*:*.m4v
-*:*.ttf
-*:*.woff
-*:*.eot
-*:*.sfd
-*:*.swf
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.pdf
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.jpg
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.png
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.gif
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.wav
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.mp3
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.m4a
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.mov
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.oga
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.ogv
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.webm
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.mp4
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.m4v
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.otf
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.ttf
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.TTF
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.woff
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.woff2
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.eot
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.sfd
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.swf
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.ani
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.cur
+TRAILING WHITESPACE, INDENT TABS, CR AT EOL: *.ico
 
 ## Documentation ##
 
@@ -217,56 +223,11 @@ W3C-TEST.ORG:.travis.yml
 # Git submodules are not currently scanned
 *:tools/*
 *:resources/*
-# File containing whitelist for lint errors
-# Format is:css/
-# ERROR TYPE:css/file/name/pattern[:line number]
-# e.g.
-# TRAILING WHITESPACE:css/example/file.html:128
-# to allow trailing whitespace on example/file.html line 128
-
-## File types that should never be checked
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.pdf
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.jpg
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.png
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.gif
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.pdf
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.wav
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.mp3
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.m4a
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.mov
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.oga
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.ogv
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.webm
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.mp4
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.m4v
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.otf
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.ttf
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.TTF
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.woff
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.woff2
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.eot
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.sfd
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.swf
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.ani
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.cur
-TRAILING WHITESPACE, INDENT TABS, CR AT EOL:css/*.ico
-
-## Git submodules are not currently scanned
-*:css/wpt_tools/*
-*:css/resources/*
-
-
-## Build system stuff
 *:css/tools/apiclient/*
 *:css/tools/w3ctestlib/*
+
+# Build system virtualenv
 *:css/tools/_virtualenv/*
-
-
-## Helper scripts ##
-W3C-TEST.ORG:css/tools/*
-PRINT STATEMENT:css/tools/*
-W3C-TEST.ORG:css/*/tools/*
-PRINT STATEMENT:css/*/tools/*
 
 
 ## Third party data files
@@ -298,6 +259,9 @@ CONTENT-MANUAL: css/*
 
 
 ## Support files not in /support/ or similar
+SUPPORT-WRONG-DIR: css/requirements.txt
+SUPPORT-WRONG-DIR: css/README.md
+SUPPORT-WRONG-DIR: css/build-css-testsuites.sh
 SUPPORT-WRONG-DIR: css/*/reftest.list
 SUPPORT-WRONG-DIR: css/*.headers
 SUPPORT-WRONG-DIR: css/*/README
@@ -594,6 +558,7 @@ CSS-COLLIDING-SUPPORT-NAME: css/css-regions-1/interactivity/full-screen/support/
 CSS-COLLIDING-SUPPORT-NAME: css/css-regions-1/interactivity/resizing/support/util.js
 
 # More duplicated copies of the above
+CSS-COLLIDING-SUPPORT-NAME: css/support/pattern-rgr-grg-rgr.png
 CSS-COLLIDING-SUPPORT-NAME: css/CSS2/archive/raw-tests/css1tests/support/pattern-rgr-grg-rgr.png
 CSS-COLLIDING-SUPPORT-NAME: css/CSS2/floats-clear/support/pattern-rgr-grg-rgr.png
 CSS-COLLIDING-SUPPORT-NAME: css/CSS2/media/support/pattern-rgr-grg-rgr.png
@@ -627,6 +592,7 @@ CSS-COLLIDING-SUPPORT-NAME: css/CSS2/normal-flow/support/pattern-rgr-grg-rgr.png
 CSS-COLLIDING-SUPPORT-NAME: css/css-images-3/support/pattern-rgr-grg-rgr.png
 CSS-COLLIDING-SUPPORT-NAME: css/CSS2/generated-content/support/pattern-rgr-grg-rgr.png
 CSS-COLLIDING-SUPPORT-NAME: css/css-flexbox-1/support/pattern-rgr-grg-rgr.png
+CSS-COLLIDING-SUPPORT-NAME: css/support/pattern-grg-rgr-grg.png
 CSS-COLLIDING-SUPPORT-NAME: css/css-fonts-3/support/pattern-grg-rgr-grg.png
 CSS-COLLIDING-SUPPORT-NAME: css/css-transforms-1/support/pattern-grg-rgr-grg.png
 CSS-COLLIDING-SUPPORT-NAME: css/cssom-view-1/support/pattern-grg-rgr-grg.png
