@@ -12,7 +12,7 @@ dictionary GPUObjectDescriptorBase {
 };
 
 [Exposed=Window]
-interface GPUAdapterLimits {
+interface GPUSupportedLimits {
     readonly attribute unsigned long maxTextureDimension1D;
     readonly attribute unsigned long maxTextureDimension2D;
     readonly attribute unsigned long maxTextureDimension3D;
@@ -35,6 +35,10 @@ interface GPUAdapterLimits {
 [Exposed=Window]
 interface GPUSupportedFeatures {
     readonly setlike<DOMString>;
+};
+
+enum GPUPredefinedColorSpace {
+    "srgb",
 };
 
 interface mixin NavigatorGPU {
@@ -61,7 +65,7 @@ enum GPUPowerPreference {
 interface GPUAdapter {
     readonly attribute DOMString name;
     [SameObject] readonly attribute GPUSupportedFeatures features;
-    [SameObject] readonly attribute GPUAdapterLimits limits;
+    [SameObject] readonly attribute GPUSupportedLimits limits;
 
     Promise<GPUDevice> requestDevice(optional GPUDeviceDescriptor descriptor = {});
 };
@@ -83,7 +87,7 @@ enum GPUFeatureName {
 [Exposed=(Window, DedicatedWorker), Serializable]
 interface GPUDevice : EventTarget {
     [SameObject] readonly attribute GPUSupportedFeatures features;
-    readonly attribute object limits;
+    [SameObject] readonly attribute GPUSupportedLimits limits;
 
     [SameObject] readonly attribute GPUQueue queue;
 
@@ -92,6 +96,7 @@ interface GPUDevice : EventTarget {
     GPUBuffer createBuffer(GPUBufferDescriptor descriptor);
     GPUTexture createTexture(GPUTextureDescriptor descriptor);
     GPUSampler createSampler(optional GPUSamplerDescriptor descriptor = {});
+    GPUExternalTexture importExternalTexture(GPUExternalTextureDescriptor descriptor);
 
     GPUBindGroupLayout createBindGroupLayout(GPUBindGroupLayoutDescriptor descriptor);
     GPUPipelineLayout createPipelineLayout(GPUPipelineLayoutDescriptor descriptor);
@@ -291,6 +296,16 @@ enum GPUTextureFormat {
 };
 
 [Exposed=Window]
+interface GPUExternalTexture {
+};
+GPUExternalTexture includes GPUObjectBase;
+
+dictionary GPUExternalTextureDescriptor : GPUObjectDescriptorBase {
+    required HTMLVideoElement source;
+    GPUPredefinedColorSpace colorSpace = "srgb";
+};
+
+[Exposed=Window]
 interface GPUSampler {
 };
 GPUSampler includes GPUObjectBase;
@@ -355,6 +370,7 @@ dictionary GPUBindGroupLayoutEntry {
     GPUSamplerBindingLayout sampler;
     GPUTextureBindingLayout texture;
     GPUStorageTextureBindingLayout storageTexture;
+    GPUExternalTextureBindingLayout externalTexture;
 };
 
 enum GPUBufferBindingType {
@@ -404,6 +420,9 @@ dictionary GPUStorageTextureBindingLayout {
     GPUTextureViewDimension viewDimension = "2d";
 };
 
+dictionary GPUExternalTextureBindingLayout {
+};
+
 [Exposed=Window]
 interface GPUBindGroup {
 };
@@ -414,7 +433,7 @@ dictionary GPUBindGroupDescriptor : GPUObjectDescriptorBase {
     required sequence<GPUBindGroupEntry> entries;
 };
 
-typedef (GPUSampler or GPUTextureView or GPUBufferBinding) GPUBindingResource;
+typedef (GPUSampler or GPUTextureView or GPUBufferBinding or GPUExternalTexture) GPUBindingResource;
 
 dictionary GPUBindGroupEntry {
     required GPUIndex32 binding;
@@ -975,6 +994,7 @@ dictionary GPUSwapChainDescriptor : GPUObjectDescriptorBase {
     required GPUTextureFormat format;
     GPUTextureUsageFlags usage = 0x10;  // GPUTextureUsage.RENDER_ATTACHMENT
     GPUCanvasCompositingAlphaMode compositingAlphaMode = "opaque";
+    GPUExtent3D size;
 };
 
 [Exposed=Window]
